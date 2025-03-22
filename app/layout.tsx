@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "./ui/components/navbar";
+import { inter, lusitana } from "./ui/fonts";
 
-const geistSans = Geist({
+export const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 export const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: "500"
+  weight: ["500", "600","700", "900"],
 })
 
-const geistMono = Geist_Mono({
+export const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -31,10 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className}  antialiased`}
       >
         <NavBar/>
+        <div className="px-4">
         {children}
+        </div>
       </body>
     </html>
   );
