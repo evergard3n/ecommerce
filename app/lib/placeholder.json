@@ -1,0 +1,47 @@
+{
+    "products": [
+      {
+        "id": "p1",
+        "name": "Wireless Headphones",
+        "image": "https://example.com/headphones.jpg",
+        "price": "$99.99",
+        "brand": "AudioTech",
+        "description": "High-quality wireless headphones with noise cancellation."
+      },
+      {
+        "id": "p2",
+        "name": "Smartphone X12",
+        "image": "https://example.com/smartphone.jpg",
+        "price": "$799.99",
+        "brand": "TechCorp",
+        "description": "Latest flagship smartphone with OLED display and 5G support."
+      },
+      {
+        "id": "p3",
+        "name": "Gaming Laptop",
+        "image": "https://example.com/laptop.jpg",
+        "price": "$1499.99",
+        "brand": "GameMaster",
+        "description": "Powerful gaming laptop with RTX 4080 and 32GB RAM."
+      }
+    ],
+    "users": [
+      {
+        "id": "u1",
+        "username": "john_doe",
+        "email": "john@example.com",
+        "phone": "123-456-7890",
+        "search_history": ["p1", "p3"],
+        "recommendations": ["p2"]
+      },
+      {
+        "id": "u2",
+        "username": "jane_smith",
+        "email": "jane@example.com",
+        "phone": "987-654-3210",
+        "search_history": ["p2"],
+        "recommendations": ["p1", "p3"]
+      }
+    ]
+  }
+  
