@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "./ui/components/navbar";
 import { inter, lusitana } from "./ui/fonts";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,15 +31,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <ClerkProvider>
+      <html lang="en">
       <body
-        className={`${inter.className}  antialiased`}
+        className={`${inter.className}  antialiased px-4`}
       >
-        <NavBar/>
-        <div className="px-4">
-        {children}
-        </div>
+        
+          <NavBar />
+          {children}
+        
       </body>
     </html>
+    </ClerkProvider>
+    
   );
 }

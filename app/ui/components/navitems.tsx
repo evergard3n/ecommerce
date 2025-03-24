@@ -10,9 +10,10 @@ export type navProps = {
 export function NavItems({href, text, isActive}: navProps ) { 
     
     return (
-      <div className={` uppercase text-black text-center w-full flex flex-col items-center text-sm pt-1`}>
+      <div className={` uppercase text-black text-center w-full group flex flex-col items-center text-sm pt-1`}>
           <Link href={href}>{text}</Link>
           <div className={`min-w-6 h-[1px]  ${isActive&&text !== 'Brands' ? 'bg-black' : 'bg-transparent'}`}></div>
+          <div className={`min-w-6 h-[1px]  group-hover:bg-black bg-transparent'}`}></div>
       </div>
     )
   }
