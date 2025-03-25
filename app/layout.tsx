@@ -36,8 +36,9 @@ export default function RootLayout({
       <body
         className={`${inter.className}  antialiased px-4`}
       >
-        
+          
           <NavBar />
+          <div className="h-12 w-full bg-white"></div>
           {children}
         
       </body>

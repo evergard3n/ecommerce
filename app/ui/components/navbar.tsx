@@ -3,7 +3,13 @@ import { GlobeAltIcon, BuildingLibraryIcon } from "@heroicons/react/24/outline";
 import { type navProps, NavItems } from "./navitems";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { SignedOut, SignInButton, SignUpButton, SignedIn, UserButton } from "@clerk/nextjs";
+import {
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  UserButton,
+} from "@clerk/nextjs";
 const navItems = [
   {
     href: "/",
@@ -38,7 +44,7 @@ export default function NavBar() {
     setIsActive(path);
   }, [path]);
   return (
-    <nav className="w-[98%] sticky bg-zinc-50 backdrop-blur-2xl min-h-12 mt-2 mx-auto border border-zinc-200 rounded-lg flex flex-row items-center gap-8 justify-between px-4">
+    <nav className="w-[98%] fixed z-20   backdrop-blur-sm min-h-12 mt-2 mx-auto border border-zinc-200 rounded-lg flex flex-row items-center gap-8 justify-between px-4">
       <ol className="flex flex-row items-center gap-12">
         <h1 className="font-black text-2xl">ecom</h1>
         {navItems.map((item, index) => (
@@ -54,7 +60,6 @@ export default function NavBar() {
       <div className="flex flex-row gap-12 uppercase">
         <SignedOut>
           <SignInButton />
-          <SignUpButton />
         </SignedOut>
         <SignedIn>
           <UserButton />

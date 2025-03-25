@@ -1,0 +1,90 @@
+{
+    "products": [
+      {
+        "id": "iphone-14",
+        "name": "iPhone 14",
+        "image": "https://via.placeholder.com/150",
+        "price": "$699",
+        "brand": "Apple",
+        "description": "A powerful smartphone with a sleek design.",
+        "technical_details": {
+          "product_id": "1",
+          "screen": {
+            "size": "6.5 inches",
+            "refresh_rate": "120Hz"
+          },
+          "camera": {
+            "front": {
+              "resolution": "32MP",
+              "features": "HDR, Night Mode"
+            },
+            "back": {
+              "resolution": "108MP + 12MP + 5MP",
+              "features": "Ultra Wide, Telephoto, OIS"
+            }
+          },
+          "cpu": {
+            "cpu_name": "Snapdragon 8 Gen 2",
+            "os": "Android 13"
+          },
+          "battery": {
+            "capacity": "5000mAh",
+            "charge_voltage": "65W Fast Charging"
+          }
+        }
+      },
+      {
+        "id": "2",
+        "name": "Smartphone Y2",
+        "image": "https://via.placeholder.com/150",
+        "price": "$499",
+        "brand": "BrandB",
+        "description": "A budget-friendly smartphone with solid performance.",
+        "technical_details": {
+          "product_id": "2",
+          "screen": {
+            "size": "6.1 inches",
+            "refresh_rate": "90Hz"
+          },
+          "camera": {
+            "front": {
+              "resolution": "16MP",
+              "features": "Portrait Mode, AI Enhancement"
+            },
+            "back": {
+              "resolution": "50MP + 8MP",
+              "features": "Wide Angle, Night Mode"
+            }
+          },
+          "cpu": {
+            "cpu_name": "MediaTek Dimensity 810",
+            "os": "Android 12"
+          },
+          "battery": {
+            "capacity": "4500mAh",
+            "charge_voltage": "33W Fast Charging"
+          }
+        }
+      }
+    ]
+    ,
+    "users": [
+      {
+        "id": "u1",
+        "username": "john_doe",
+        "email": "john@example.com",
+        "phone": "123-456-7890",
+        "search_history": ["p1", "p3"],
+        "recommendations": ["p2"]
+      },
+      {
+        "id": "u2",
+        "username": "jane_smith",
+        "email": "jane@example.com",
+        "phone": "987-654-3210",
+        "search_history": ["p2"],
+        "recommendations": ["p1", "p3"]
+      }
+    ]
+  }
+  
