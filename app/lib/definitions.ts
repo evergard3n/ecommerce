@@ -5,7 +5,6 @@ export interface Product {
     price: string;
     brand: string;
     description: string;
-    technical_details: TechnicalDetails
 }
 export interface TechnicalDetails {
     product_id: string,
