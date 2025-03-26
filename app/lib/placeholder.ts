@@ -11,7 +11,7 @@ export const products: Product[] = [
   },
   {
     id: "iphone-15",
-    name: "iPhone 14",
+    name: "iPhone 15",
     image: "/images/iphone-14.jpg",
     price: "$699",
     brand: "Apple",
@@ -20,7 +20,7 @@ export const products: Product[] = [
   },
   {
     id: "iphone-16",
-    name: "iPhone 14",
+    name: "iPhone 16",
     image: "/images/iphone-14.jpg",
     price: "$699",
     brand: "Apple",
@@ -29,7 +29,7 @@ export const products: Product[] = [
   },
   {
     id: "iphone-17",
-    name: "iPhone 14",
+    name: "iPhone 17",
     image: "/images/iphone-14.jpg",
     price: "$699",
     brand: "Apple",
