@@ -1,4 +1,4 @@
-import { Product, TechnicalDetails } from "./definitions";
+import { Product, PhoneTechnicalDetails } from "./definitions";
 import { products, technical_details } from "./placeholder";
 
 export async function getProductById(id: string) {
@@ -43,7 +43,7 @@ export async function getProductTechnicalDetails(id: string) {
     if (!res) {
       throw new Error(`Product with id ${id} not found`);
     }
-    const response: TechnicalDetails = res;
+    const response: PhoneTechnicalDetails = res;
     return response;
   } catch (error) {
     console.error("Database Error:", error);

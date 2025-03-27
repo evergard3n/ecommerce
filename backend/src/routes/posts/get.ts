@@ -1,5 +1,5 @@
 import { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
-import db from "../../db/index.ts";
+import db from "../../db/decapreted.ts";
 import { PostSchemas } from "../../schemas/index.ts"
 import CommonSchemas from "../../schemas/commons/index.ts";
  const route: FastifyPluginAsyncTypebox = async  (app) => {

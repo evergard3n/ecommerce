@@ -5,8 +5,12 @@ export interface Product {
     price: string;
     brand: string;
     description: string;
+    type: "phone" | "laptop" | "tablet"
 }
-export interface TechnicalDetails {
+export interface Phone extends Product {}
+export interface Laptop extends Product {}
+
+export interface PhoneTechnicalDetails {
     product_id: string,
     screen: {
         size: string,
@@ -31,6 +35,30 @@ export interface TechnicalDetails {
         capacity: string,
         charge_voltage: string,
     },
+}
+
+export interface TabletTechnicalDetails extends  PhoneTechnicalDetails {}
+
+export interface LaptopTechnialDetails  {
+    cpu : {
+        brand: string,
+        name: string,
+    },
+    gpu : {
+        discrete_gpu : string,
+    },
+    ram: {
+        capacity: string,
+        type: string,
+    },
+    screen: {
+        size: string,
+        refresh_rate: string,
+    }, 
+    battery: {
+        capacity: string,
+        charger: string,
+    }
 }
 
 export interface User {
