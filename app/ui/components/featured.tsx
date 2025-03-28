@@ -35,8 +35,6 @@ export default function Featured() {
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ x: 20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
           exit={{ x: -20, opacity: 0 }}
           transition={{ duration: 0.5 }}
           className="w-full h-full flex flex-row justify-between"
