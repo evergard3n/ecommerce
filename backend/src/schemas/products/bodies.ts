@@ -8,7 +8,9 @@ export const Products = Type.Object({
     price: Type.String(),
     brand: Type.String(),
     description: Type.String(),
+    storage: Type.String()
 })
+
 
 export const TechnicalDetails = Type.Object({
     product_id: Type.String(),
@@ -35,6 +37,30 @@ export const TechnicalDetails = Type.Object({
         capacity: Type.String(),
         charge_voltage: Type.String(),
     }),
+})
+
+export const PhoneTechnicalDetails = Type.Object({
+    product_id: Type.String(),
+    screen: Type.String(),
+    camera_front: Type.String(),
+    camera_back: Type.String(),
+    cpu: Type.String(),
+    battery: Type.String(), 
+})
+
+export const LaptopTechnicalDetails = Type.Object({
+    product_id: Type.String(),
+    screen: Type.String(),
+    cpu: Type.String(),
+    more: Type.String(),
+    ram: Type.String(),
+    battery: Type.String(),
+})
+
+export const User = Type.Object({
+    id: Type.String(),
+    search_history: Type.Array(Type.String(), {default: null}),
+    recommendations: Type.Array(Type.String(), {default: null}),
 })
 
 export const ProductsPaginated = CommonSchemas.Bodies.PaginationResult(Products)

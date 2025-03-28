@@ -9,16 +9,17 @@ export type SingleItemProps = {
   image: string;
 };
 export default function SingleItem(props: Product) {
+  const encodedProductId = encodeURIComponent(props.product_id);
   return (
-    <div className="lg:w-full lg:h-108  items-start border border-zinc-200 rounded-md  hover:drop-shadow-lg hover:bg-gradient-to-b bg-white transition-all duration-200 ease-in-out">
-      <Link href={`/products/${props.id}`} className="p-4 flex flex-col justify-between items-center">
-        <div className="text-left w-full">
+    <div className="lg:w-full lg:min-h-108 h-fit max-h-112 items-start border border-zinc-200 rounded-md  hover:drop-shadow-lg hover:bg-gradient-to-b bg-white transition-all duration-200 ease-in-out">
+      <Link href={`/products/${encodedProductId}`} className="p-4 flex flex-col justify-between items-center h-full">
+        <div className="text-left w-full flex-grow h-32  ">
           <h2 className="text-zinc-700">{props.brand}</h2>
-          <h3 className="font-bold text-2xl">{props.name}</h3>
+          <h3 className="font-bold text-2xl">{props.name} {props.storage}</h3>
           <p>{props.price}</p>
         </div>
 
-        <div className="w-2/3 scale-125 flex-grow h-full pt-8">
+        <div className="w-full h-fit  flex flex-col items-center justify-center overflow-hidden">
           <Suspense fallback={<div className="bg-zinc-300 w-full h-full">Loading...</div>}>
             <Image
               alt={props.name}

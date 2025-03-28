@@ -1,10 +1,11 @@
 export interface Product {
-    id: string;
+    product_id: string;
     name: string;
     image: string;
     price: string;
     brand: string;
     description: string;
+    storage: string;
     type: "phone" | "laptop" | "tablet"
 }
 export interface Phone extends Product {}

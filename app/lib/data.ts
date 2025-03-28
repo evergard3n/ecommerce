@@ -5,8 +5,10 @@ export async function getProductById(id: string) {
   try {
     // const res = await fetch('/placeholder.json') ;
     // const res_json = await res.json()
-
-    const res = await products.find((p) => p.id === id);
+    const response = await fetch(
+      `http://localhost:3000/api/products/phone/${id}`
+    );
+    const res = await response.json();
     if (!res) {
       throw new Error(`Product with id ${id} not found`);
     }
@@ -23,10 +25,17 @@ export async function getRecommendedProduct(userId: string) {
     // const res_json = await res.json()
 
     // TODO: search recommended products by userId
-    const res = products;
-    if (!res) {
-      throw new Error(`Failed fetching recommended`);
+    const response = await fetch(
+      `http://localhost:3000/api/products/recommended/${userId}`
+    );
+    if (!response.ok) {
+      throw new Error("Cant fetch recommended");
     }
+    const res = await response.json();
+    // const res = products;
+    // if (!res) {
+    //   throw new Error(`Failed fetching recommended`);
+    // }
     const product: Product[] = res.slice(0, 4);
     return product;
   } catch (error) {
@@ -39,15 +48,38 @@ export async function getProductTechnicalDetails(id: string) {
     // const res = await fetch('/placeholder.json') ;
     // const res_json = await res.json()
 
-    const res = await technical_details.find((p) => p.product_id === id);
+    const response = await fetch(
+      `http://localhost:3000/api/products/phone/${id}/technical`
+    );
+    const res = await response.json();
     if (!res) {
       throw new Error(`Product with id ${id} not found`);
     }
-    const response: PhoneTechnicalDetails = res;
-    return response;
+
+    return res;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(`Failed to fetch product with id ${id}`);
   }
-  
+}
+
+export async function getPhoneVariations(id: string) {
+  try {
+    // const res = await fetch('/placeholder.json') ;
+    // const res_json = await res.json()
+
+    const response = await fetch(
+      `http://localhost:3000/api/products/variations/${id}`
+    );
+    if (!response.ok) {
+      throw new Error("Cant fetch variations");
+    }
+    const res = await response.json();
+
+    const product: Product[] = res.slice(0, 4);
+    return product;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch variations");
+  }
 }
