@@ -21,7 +21,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   const id = params.id;
   const product: Product = await getProductById(id);
   const imageUrls : string = product.image
-  const test = imageUrls.split("\\n").filter((imageUrl) => imageUrl !== "");
+  const test = imageUrls.split("\n").filter((imageUrl) => imageUrl !== "");
   // TODO: change this to actual recommendations
   const {userId} = await auth();
   const productList: Product[] = await getRecommendedProduct(userId ? userId : "");

@@ -1,4 +1,4 @@
-import { Product, PhoneTechnicalDetails } from "./definitions";
+import { Product, PhoneTechnicalDetails, ProductCoverOnly } from "./definitions";
 import { products, technical_details } from "./placeholder";
 
 export async function getProductById(id: string) {
@@ -81,5 +81,30 @@ export async function getPhoneVariations(id: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch variations");
+  }
+}
+export async function getPhoneCover(id: string) {
+  const encoded = encodeURIComponent(id);
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/products/phone/${encoded}/cover`
+    );
+    if (!response.ok) {
+      
+      throw new Error("Cant fetch cover");
+    }
+    
+    const res = await response.json();
+    console.log(encoded)
+    console.log(res)
+    const selected: ProductCoverOnly = {
+      product_id: res.product_id,
+      cover_image: res.cover_image,
+      type: 'phone'
+    };
+    return selected;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch cover");
   }
 }

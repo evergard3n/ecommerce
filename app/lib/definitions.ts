@@ -6,8 +6,15 @@ export interface Product {
     brand: string;
     description: string;
     storage: string;
+    url:string;
     type: "phone" | "laptop" | "tablet"
 }
+export interface ProductCoverOnly {
+    product_id: string;
+    cover_image: string;
+    type : "phone" | "laptop" | "tablet"
+}
+
 export interface Phone extends Product {}
 export interface Laptop extends Product {}
 

@@ -10,32 +10,19 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
     {
       schema: {
         params: ProductSchemas.Params.ProductId,
-        response: {
-          200: ProductSchemas.Bodies.Products,
-        },
+        
       },
     },
     async (request, reply) => {
       const { productId } = request.params;
       try {
         const phoneCollection = await app.mongo.db
-          ?.collection("phone")
+          ?.collection("phone-2")
           .findOne({ product_id: productId });
-        if (phoneCollection) {
-          const selectedProps: Product = {
-            id: productId,
-            name: phoneCollection.name,
-            image: phoneCollection.image,
-            price: phoneCollection.price,
-            brand: phoneCollection.brand,
-            description: phoneCollection.description,
-            storage: phoneCollection.storage,
-          };
+        
 
-          reply.send(selectedProps);
-        } else {
-          throw new Error(`Product with id ${productId} not found`);
-        }
+          reply.send(phoneCollection);
+        
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +42,7 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
       const { productId } = request.params;
       try {
         const phone_technical = await app.mongo.db
-          ?.collection("phone_technical")
+          ?.collection("phone2_technical")
           .findOne({ product_id: productId });
         if (phone_technical) {
           const selectedProps = {
@@ -64,7 +51,7 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
             camera_front: phone_technical.camera_front,
             camera_back: phone_technical.camera_back,
             cpu: phone_technical.cpu,
-            battery: phone_technical.battery
+            battery: phone_technical.battery,
           };
 
           reply.send(selectedProps);
@@ -73,6 +60,32 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
         }
       } catch (error) {
         console.error(error);
+      }
+    }
+  );
+  app.get(
+    "/phone/:url/cover",
+    {
+      schema: {
+        params: ProductSchemas.Params.Url,
+      },
+    },
+    async (request, reply) => {
+      const { url } = request.params;
+      
+      try {
+        const phone_cover = await app.mongo.db
+          ?.collection("phone2_cover")
+          .findOne({ url:url });
+        if (phone_cover) {
+          const selectedProps = {
+            product_id: phone_cover.product_id,
+            cover_image: phone_cover.cover_image,
+          };
+          return selectedProps;
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
   );

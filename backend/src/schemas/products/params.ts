@@ -6,3 +6,6 @@ export const ProductId = Type.Object({
 export const UserId = Type.Object({
     userId : Type.String()
 })
+export const Url = Type.Object({
+    url : Type.String()
+})

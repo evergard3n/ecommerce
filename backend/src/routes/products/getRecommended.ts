@@ -19,7 +19,7 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
           .findOne({ user_id: userId });
         if (!userProfile) {
           const result = await app.mongo.db
-            ?.collection("phone")
+            ?.collection("phone-2")
             .find()
             .limit(4)
             .toArray();
@@ -28,11 +28,11 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
           const userRecommended = userProfile.recommended;
           if (app.mongo.db && userRecommended && userRecommended.length < 4) {
             const fourNewest = await app.mongo.db
-              ?.collection("phone")
+              ?.collection("phone-2")
               .aggregate([{ $sample: { size: 4 - userRecommended.length } }])
               .toArray();
             const userRecommendedDocuments = await app.mongo.db
-              ?.collection("phone")
+              ?.collection("phone-2")
               .find({ product_id: { $in: userRecommended } })
               .toArray();
             if (userRecommendedDocuments && fourNewest) {
@@ -41,7 +41,7 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
             }
           } else {
             const result = await app.mongo.db
-              ?.collection("phones")
+              ?.collection("phone-2")
               .find({ product_id: { $in: userRecommended } })
               .toArray();
             reply.send(result);
@@ -62,7 +62,7 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
     async (request, reply) => {
       try {
         const result = await app.mongo.db
-          ?.collection("phone")
+          ?.collection("phone-2")
           .aggregate([{ $sample: { size: 4 } }])
           .toArray();
         reply.send(result);
