@@ -77,3 +77,8 @@ export interface User {
     search_history: Array<string>;
     recommendations: string[];
 }
+
+export interface Chat {
+    message: string;
+    sender: string;
+}

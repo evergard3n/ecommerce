@@ -4,6 +4,10 @@ import "./globals.css";
 import NavBar from "./ui/components/navbar";
 import { inter, lusitana } from "./ui/fonts";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ChatbotProvider } from "./lib/chatbotContext";
+import { WebSocketProvider } from "./lib/wsContext";
+import { AudioRecorderProvider } from "./lib/transcriptContext";
+import Chatbot from "./ui/components/chatbot/chatbot";
 
 export const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,8 +16,8 @@ export const geistSans = Geist({
 export const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["500", "600","700", "900"],
-})
+  weight: ["500", "600", "700", "900"],
+});
 
 export const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -32,18 +36,20 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-      <body
-        className={`${inter.className}  antialiased px-4`}
-      >
-          
-          <NavBar />
-          <div className="h-12 w-full bg-white"></div>
-          {children}
-        
-      </body>
-    </html>
+      <ChatbotProvider>
+        <WebSocketProvider>
+          <AudioRecorderProvider>
+            <html lang="en">
+              <body className={`${inter.className}  antialiased px-4`}>
+                <NavBar />
+                <div className="h-12 w-full bg-white"></div>
+                {children}
+                <Chatbot/>
+              </body>
+            </html>
+          </AudioRecorderProvider>
+        </WebSocketProvider>
+      </ChatbotProvider>
     </ClerkProvider>
-    
   );
 }
