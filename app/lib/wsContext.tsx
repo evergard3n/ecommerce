@@ -28,23 +28,22 @@ export const  WebSocketProvider = ({
   const [messages, setMessages] = useState<Chat[]>([]);
   const [formContent, setFormContent] = useState();
   const { user } =  useUser();
-  useEffect(() => {
-    if(!user) return;
-    const getMessages = async () => {
-      const response = await fetch(`https://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/history/${user.id}`);
-      if(!response) return;
-      console.log(response);
-      
-      const data = await response.json();
-      if(!data.chat_history) return;
-      setMessages(data.chat_history);
+  // useEffect(() => {
+  //   if(!user) return;
+  //   const getMessages = async () => {
+  //     const response = await fetch(`${process.env.NEXT_PUBLIC_CHATBOT_URL}/api/history/${user.id}`);
+  //     if(!response) return;
+  //     console.log(response);
+  //     const data = await response.json();
+  //     if(!data.chat_history) return;
+  //     setMessages(data.chat_history);
 
-    }
-    getMessages();
-  },[user])
+  //   }
+  //   getMessages();
+  // },[user])
   useEffect(() => {
     // const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat`);
-    const ws = new WebSocket(`wss://vitalink-9uk0.onrender.com/api/chat`);
+    const ws = new WebSocket(`${process.env.NEXT_PUBLIC_CHATBOT_URL}/ws`);
     ws.onopen = () => console.log("🟢 WebSocket đã kết nối!");
     ws.onclose = () => console.log(`🔴 WebSocket mất kết nối! ${process.env.NEXT_PUBLIC_BACKEND_URL}`);
     ws.onerror = (error) => console.error("⚠️ WebSocket error:", error);
@@ -60,7 +59,7 @@ export const  WebSocketProvider = ({
         setMessages((prev) => [...prev, newMessage]);
         setFormContent(response.form);
       } else {
-        
+        setMessages(response)
         console.log('form received')
       }
       
@@ -81,6 +80,7 @@ export const  WebSocketProvider = ({
       };
 
       socket.send(JSON.stringify({ type: "chat", message: message, user_id : user?.id}));
+      console.log(chatMessage)
       setMessages((prev) => [...prev, chatMessage]);
     } else {
       console.warn("⚠️ WebSocket chưa sẵn sàng!");

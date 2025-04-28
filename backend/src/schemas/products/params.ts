@@ -9,3 +9,6 @@ export const UserId = Type.Object({
 export const Url = Type.Object({
     url : Type.String()
 })
+export const Brand = Type.Object({
+    brand : Type.String()
+})

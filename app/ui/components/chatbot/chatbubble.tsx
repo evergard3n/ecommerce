@@ -30,7 +30,7 @@ export default function ChatBubbles() {
     const message = useWebSocket()?.messages || [];
     const data = message || [];
     return (
-        <div className="grow">
+        <div className="grow w-full">
             <ol className="max-h-[620px] h-fit w-full flex flex-col items-start px-4 py-2 gap-4 overflow-y-auto" ref={olRef}>
                 {data.map((chat,index) => {
                     if(chat.sender === "BOT" || chat.sender === "Bot") {

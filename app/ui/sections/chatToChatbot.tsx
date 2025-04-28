@@ -1,5 +1,6 @@
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import TextTransition from "../components/textAnimation";
+import ChatToChatbotForm from "./chatToChatbotForm";
 export default function ChatToChatbot() {
   return (
     <section className="h-fit py-8 flex flex-col items-center gap-4 bg-zinc-900 rounded-md">
@@ -9,12 +10,7 @@ export default function ChatToChatbot() {
       <TextTransition/>
       </div>
       <div className="w-1/3">
-        <form action="" className="bg-zinc-50 h-12 rounded-full w-full flex flex-row items-center px-1">
-            <input type="text" className="flex-grow focus:outline-none px-3" placeholder="Ask anything"/>
-            <button type="submit" className="h-10 w-10 bg-zinc-400 rounded-full flex items-center justify-center text-zinc-50">
-                <ArrowUpIcon className="size-5"/>
-            </button>
-        </form>
+        <ChatToChatbotForm />
       </div>
     </section>
   );

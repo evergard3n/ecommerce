@@ -1,12 +1,15 @@
 import { Product, PhoneTechnicalDetails, ProductCoverOnly } from "./definitions";
 import { products, technical_details } from "./placeholder";
 
+const backend_url = 'http://localhost:3000'
+
 export async function getProductById(id: string) {
+  
   try {
     // const res = await fetch('/placeholder.json') ;
     // const res_json = await res.json()
     const response = await fetch(
-      `http://localhost:3000/api/products/phone/${id}`
+      `${backend_url}/api/products/phone/${id}`
     );
     const res = await response.json();
     if (!res) {
@@ -26,7 +29,7 @@ export async function getRecommendedProduct(userId: string) {
 
     // TODO: search recommended products by userId
     const response = await fetch(
-      `http://localhost:3000/api/products/recommended/${userId}`
+      `${backend_url}/api/products/recommended/${userId}`
     );
     if (!response.ok) {
       throw new Error("Cant fetch recommended");
@@ -49,7 +52,7 @@ export async function getProductTechnicalDetails(id: string) {
     // const res_json = await res.json()
 
     const response = await fetch(
-      `http://localhost:3000/api/products/phone/${id}/technical`
+      `${backend_url}/api/products/phone/${id}/technical`
     );
     const res = await response.json();
     if (!res) {
@@ -69,7 +72,7 @@ export async function getPhoneVariations(id: string) {
     // const res_json = await res.json()
 
     const response = await fetch(
-      `http://localhost:3000/api/products/variations/${id}`
+      `${backend_url}/api/products/variations/${id}`
     );
     if (!response.ok) {
       throw new Error("Cant fetch variations");
@@ -87,7 +90,7 @@ export async function getPhoneCover(id: string) {
   const encoded = encodeURIComponent(id);
   try {
     const response = await fetch(
-      `http://localhost:3000/api/products/phone/${encoded}/cover`
+      `${backend_url}/api/products/phone/${encoded}/cover`
     );
     if (!response.ok) {
       
