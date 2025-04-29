@@ -98,8 +98,6 @@ export async function getPhoneCover(id: string) {
     }
     
     const res = await response.json();
-    console.log(encoded)
-    console.log(res)
     const selected: ProductCoverOnly = {
       product_id: res.product_id,
       cover_image: res.cover_image,
@@ -109,5 +107,23 @@ export async function getPhoneCover(id: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch cover");
+  }
+}
+
+export async function getPhonesByBrand(brand:string) {
+  try {
+    const response = await fetch(
+      `${backend_url}/api/products/phone/brands/${brand}?limit=8`
+    );
+    if (!response.ok) {
+      throw new Error("Cant fetch phones");
+    }
+    const res = await response.json();
+    console.log(res)
+    const products: Product[] = res.items;
+    return products;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch phones");
   }
 }

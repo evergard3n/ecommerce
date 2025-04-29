@@ -18,6 +18,16 @@ const navItems = [
   {
     href: "/",
     text: "Brands",
+    items: [
+      {
+        href: "/",
+        text: "Apple",
+      },
+      {
+        href: "/",
+        text: "Samsung",
+      },
+    ]
   },
   {
     href: "/products/phones",
@@ -44,7 +54,7 @@ export default function NavBar() {
     setIsActive(path);
   }, [path]);
   return (
-    <nav className="w-[98%] fixed z-20   backdrop-blur-sm min-h-12 mt-2 mx-auto border border-zinc-200 rounded-lg flex flex-row items-center gap-8 justify-between px-4">
+    <nav className="w-[98%] fixed z-20 hover:h-fit  transition-all duration-500 ease-in-out   backdrop-blur-sm min-h-12 mt-2 mx-auto border border-zinc-200 rounded-lg flex flex-row items-center gap-8 justify-between px-4">
       <ol className="flex flex-row items-center gap-12">
         <h1 className="font-black text-2xl">ecom</h1>
         {navItems.map((item, index) => (
@@ -53,6 +63,7 @@ export default function NavBar() {
               href={item.href}
               text={item.text}
               isActive={isActive === item.href}
+              items={item.items || []}
             />
           </li>
         ))}

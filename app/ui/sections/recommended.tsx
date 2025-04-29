@@ -1,6 +1,6 @@
 import { poppins, geistSans } from "@/app/layout";
-import { type SingleItemProps } from "../components/singleItem";
-import SingleItem from "../components/singleItem";
+import { type SingleItemProps } from "../products/singleItem";
+import SingleItem from "../products/singleItem";
 import Featured from "../components/featured";
 import { getProductById, getRecommendedProduct } from "@/app/lib/data"
 import { auth } from "@clerk/nextjs/server";
