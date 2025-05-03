@@ -24,7 +24,7 @@ export default function SingleItem(props: Product) {
   },[props])
   const encodedProductId = encodeURIComponent(props.product_id);
   return (
-    <div className="lg:w-full lg:min-h-108 h-fit max-h-112 items-start overflow-hidden  bg-zinc-100  transition-all duration-200 ease-in-out">
+      <div className="lg:w-full lg:min-h-108 h-fit max-h-112 items-start overflow-hidden  bg-zinc-100  transition-all duration-200 ease-in-out">
       <Link
         href={`/products/${encodedProductId}`}
         className="p-8 flex flex-col justify-between items-center h-full"
@@ -43,7 +43,7 @@ export default function SingleItem(props: Product) {
           >
             <Image
               alt={props.name}
-              src={productCoverImage.cover_image}
+              src={productCoverImage.cover_image || '/images/iphone-14.jpg'}
               width={180}
               height={180}
               className="overflow-hidden"

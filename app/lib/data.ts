@@ -110,10 +110,10 @@ export async function getPhoneCover(id: string) {
   }
 }
 
-export async function getPhonesByBrand(brand:string) {
+export async function getPhonesByBrand({page, brand} : {page: number, brand: string}) {
   try {
     const response = await fetch(
-      `${backend_url}/api/products/phone/brands/${brand}?limit=8`
+      `${backend_url}/api/products/phone/brands/${brand}?page=${page}&limit=8`
     );
     if (!response.ok) {
       throw new Error("Cant fetch phones");
@@ -121,7 +121,7 @@ export async function getPhonesByBrand(brand:string) {
     const res = await response.json();
     console.log(res)
     const products: Product[] = res.items;
-    return products;
+    return res;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch phones");
