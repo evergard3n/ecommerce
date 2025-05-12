@@ -16,9 +16,9 @@
 		"pg": "^8.13.3"
 	},
 	"scripts": {
-		"build": "npm run build",
+		"build": "tsc",
 		"dev": "FASTIFY_AUTOLOAD_TYPESCRIPT=1 node --import tsx/esm --watch src src/index.ts",
-		"start": "next start"
+		"start": "node dist/index.js"
 	},
 	"devDependencies": {
 		"@types/node": "^22.13.4",
