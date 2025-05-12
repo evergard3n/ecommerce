@@ -1,9 +1,6 @@
-import { FastifyPluginAsync } from "fastify";
 import { ProductSchemas, CommonSchemas } from "../../schemas/index.ts";
 
 import { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
-import { ObjectId } from "@fastify/mongodb";
-import { Product } from "../../db/decapreted.ts";
 
 const route: FastifyPluginAsyncTypebox = async (app) => {
   app.get(
