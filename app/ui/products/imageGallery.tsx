@@ -36,7 +36,7 @@ export default function ImageGallery({ imageUrls }: { imageUrls: string[] }) {
     setIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
   }
   return (
-    <div className="w-2/3 h-160 relative flex-grow z-20 bg-white flex items-center justify-center drop-shadow-md rounded-2xl border-8 border-zinc-50 overflow-clip">
+    <div className="w-full h-160 relative flex-grow z-20 bg-white flex items-center justify-center drop-shadow-md rounded-2xl border-8 border-zinc-50 overflow-clip">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}

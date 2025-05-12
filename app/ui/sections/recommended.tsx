@@ -14,7 +14,7 @@ export default async function Recommended() {
       <h1 className={`text-black text-3xl font-bold`}>Featured Products. <span className="text-zinc-600">Picked just for you.</span></h1>
       <div className="grid grid-cols-4 gap-4 w-full">
         {recommendedProducts.map((item, index) => (
-          <SingleItem key={index} {...item} />
+          <SingleItem key={index} props={item} type="phone" />
         ))}
       </div>
     </section>

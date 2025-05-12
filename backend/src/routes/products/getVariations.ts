@@ -13,10 +13,10 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
       const productId = request.params.productId;
       try {
         const targetDevice = await app.mongo.db
-          ?.collection("phone-2")
+          ?.collection("phone-main")
           .findOne({ product_id: productId });
           const variations = await app.mongo.db
-          ?.collection("phone-2")
+          ?.collection("phone-main")
           .aggregate([
             { $match: { name: targetDevice?.name } },
             {

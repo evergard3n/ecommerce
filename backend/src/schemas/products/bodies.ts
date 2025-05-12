@@ -52,9 +52,9 @@ export const LaptopTechnicalDetails = Type.Object({
     product_id: Type.String(),
     screen: Type.String(),
     cpu: Type.String(),
-    more: Type.String(),
     ram: Type.String(),
     battery: Type.String(),
+    more: Type.String(),
 })
 
 export const User = Type.Object({

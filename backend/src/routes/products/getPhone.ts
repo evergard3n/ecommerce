@@ -17,7 +17,7 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
       const { productId } = request.params;
       try {
         const phoneCollection = await app.mongo.db
-          ?.collection("phone-2")
+          ?.collection("phone-main")
           .findOne({ product_id: productId });
 
         reply.send(phoneCollection);
@@ -27,20 +27,20 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
     }
   );
   app.get(
-    "/phone/:productId/technical",
+    "/phone/technical",
     {
       schema: {
-        params: ProductSchemas.Params.ProductId,
+        querystring: ProductSchemas.Params.ProductId,
         response: {
           200: ProductSchemas.Bodies.PhoneTechnicalDetails,
         },
       },
     },
     async (request, reply) => {
-      const { productId } = request.params;
+      const { productId } = request.query;
       try {
         const phone_technical = await app.mongo.db
-          ?.collection("phone2_technical")
+          ?.collection("phone-main-technical")
           .findOne({ product_id: productId });
         if (phone_technical) {
           const selectedProps = {
@@ -62,18 +62,18 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
     }
   );
   app.get(
-    "/phone/:url/cover",
+    "/phone/cover",
     {
       schema: {
-        params: ProductSchemas.Params.Url,
+        querystring: ProductSchemas.Params.Url,
       },
     },
     async (request, reply) => {
-      const { url } = request.params;
+      const { url } = request.query;
 
       try {
         const phone_cover = await app.mongo.db
-          ?.collection("phone2_cover")
+          ?.collection("phone-main-cover")
           .findOne({ url: url });
         if (phone_cover) {
           const selectedProps = {
@@ -106,14 +106,14 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
 
       try {
         const phones_by_brand = await app.mongo.db
-          ?.collection("phone-2")
+          ?.collection("phone-main")
           .find({ brand: brand })
           .skip(skipAmount)
           .limit(limitNumber)
           .toArray();
 
         const totalItems = await app.mongo.db
-          ?.collection("phone-2")
+          ?.collection("phone-main")
           .countDocuments({ brand: brand });
 
         const totalPages = totalItems ? Math.ceil(totalItems / limitNumber) : 1;

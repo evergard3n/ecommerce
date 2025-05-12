@@ -9,9 +9,9 @@ export type SingleItemProps = {
   price: string;
   image: string;
 };
-export default async function SingleItem(props: Product) {
+export default async function SingleItem({props, type} : {props: Product, type: "phone" | "laptop" | "tablet"}) {
   const encodedProductId = encodeURIComponent(props.product_id);
-  const productCoverImage: ProductCoverOnly = await getPhoneCover(props.url);
+  const productCoverImage: ProductCoverOnly = await getPhoneCover({id: props.url, type});
   return (
     <div className="lg:w-full lg:min-h-108 h-fit max-h-112 items-start border border-zinc-200 rounded-md overflow-hidden  hover:drop-shadow-lg hover:bg-gradient-to-b bg-white transition-all duration-200 ease-in-out">
       <Link

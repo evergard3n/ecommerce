@@ -5,3 +5,9 @@ export const Pagination = Type.Object({
     limit: Type.Number({default: 10}),
 
 })
+export const ProductId = Type.Object({
+    productId: Type.String(),
+})
+export const Url = Type.Object({
+    url: Type.String(),
+})

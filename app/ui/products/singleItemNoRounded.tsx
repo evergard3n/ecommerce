@@ -11,13 +11,13 @@ export type SingleItemProps = {
   price: string;
   image: string;
 };
-export default function SingleItem(props: Product) {
+export default function SingleItem({props, type} : {props: Product, type: "phone" | "laptop" | "tablet"}) {
   const [productCoverImage, setProductCoverImage] = useState<ProductCoverOnly>(
     {} as ProductCoverOnly
   );
   useEffect(()=>{
     async function fetchProductCoverImage() {
-      const productCoverImage = await getPhoneCover(props.url);
+      const productCoverImage = await getPhoneCover({id: props.url, type});
       setProductCoverImage(productCoverImage);
     }
     fetchProductCoverImage();
@@ -41,13 +41,17 @@ export default function SingleItem(props: Product) {
               <div className="bg-zinc-300 w-full h-full">Loading...</div>
             }
           >
-            <Image
-              alt={props.name}
-              src={productCoverImage.cover_image || '/images/iphone-14.jpg'}
-              width={180}
-              height={180}
-              className="overflow-hidden"
-            />
+            {
+              productCoverImage.cover_image && (
+                <Image
+                  alt={props.name}
+                  src={productCoverImage.cover_image}
+                  width={180}
+                  height={180}
+                  className="overflow-hidden"
+                />
+              )
+            }
           </Suspense>
         </div>
       </Link>

@@ -49,7 +49,7 @@ export default function ProductsByBrands() {
           ? Array.from({ length: 8 }).map((_, i) => (
               <SingleItemFallback key={i} />
             ))
-          : products.map((item, i) => <SingleItem key={i} {...item} />)}
+          : products.map((item, i) => <SingleItem key={i} props={item} type="phone" />)}
       </div>
       <div className="flex flex-row gap-4 items-center">
         <button onClick={() => setPage((prev) => prev - 1)} className="text-black w-5 h-5 disabled:text-zinc-200" disabled={page === 1}><ArrowLeftIcon></ArrowLeftIcon></button>

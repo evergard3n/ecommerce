@@ -4,8 +4,6 @@ import { Chat } from "./definitions";
 import { useUser } from "@clerk/nextjs";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-
-
 interface WebSocketContextType {
   socket: WebSocket | null;
   messages: Chat[] | undefined;
@@ -14,12 +12,11 @@ interface WebSocketContextType {
   formContent: any;
 }
 
-
 const WebSocketContext = createContext<WebSocketContextType | undefined>(
   undefined
 );
 
-export const  WebSocketProvider = ({
+export const WebSocketProvider = ({
   children,
 }: {
   children: React.ReactNode;
@@ -27,7 +24,7 @@ export const  WebSocketProvider = ({
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [messages, setMessages] = useState<Chat[]>([]);
   const [formContent, setFormContent] = useState();
-  const { user } =  useUser();
+  const { user } = useUser();
   // useEffect(() => {
   //   if(!user) return;
   //   const getMessages = async () => {
@@ -45,25 +42,28 @@ export const  WebSocketProvider = ({
     // const ws = new WebSocket(`wss://${process.env.NEXT_PUBLIC_BACKEND_URL}/api/chat`);
     const ws = new WebSocket(`${process.env.NEXT_PUBLIC_CHATBOT_URL}/ws`);
     ws.onopen = () => console.log("🟢 WebSocket đã kết nối!");
-    ws.onclose = () => console.log(`🔴 WebSocket mất kết nối! ${process.env.NEXT_PUBLIC_BACKEND_URL}`);
+    ws.onclose = () =>
+      console.log(
+        `🔴 WebSocket mất kết nối! ${process.env.NEXT_PUBLIC_BACKEND_URL}`
+      );
     ws.onerror = (error) => console.error("⚠️ WebSocket error:", error);
 
     ws.onmessage = (event) => {
       const response = JSON.parse(event.data);
-      if(response.reply && response.reply !== "Cập nhật form thành công.") {
+      if (response.reply && response.reply !== "Cập nhật form thành công.") {
         const newMessage: Chat = {
           message: response.reply,
           sender: "BOT",
         };
-        console.log(response)
+        console.log(response);
         setMessages((prev) => [...prev, newMessage]);
         setFormContent(response.form);
       } else {
-        setMessages(response)
-        console.log('form received')
+        setMessages(response);
+        console.log("form received");
       }
-      
-       // Lưu tin nhắn mới
+
+      // Lưu tin nhắn mới
     };
 
     setSocket(ws);
@@ -73,24 +73,24 @@ export const  WebSocketProvider = ({
     };
   }, []);
   function sendMessage(message: string) {
+    const chatMessage: Chat = {
+      sender: "User",
+      message: message,
+    };
+    setMessages((prev) => [...prev, chatMessage]);
     if (socket && socket.readyState === WebSocket.OPEN) {
-      const chatMessage: Chat = {
-        sender: "User",
-        message: message,
-      };
-
-      socket.send(JSON.stringify({ type: "chat", message: message, user_id : user?.id}));
-      console.log(chatMessage)
-      setMessages((prev) => [...prev, chatMessage]);
+      socket.send(
+        JSON.stringify({ type: "chat", message: message, user_id: user?.id })
+      );
+      console.log(chatMessage);
+      
     } else {
       console.warn("⚠️ WebSocket chưa sẵn sàng!");
     }
   }
   function sendFormData(formData: any) {
-    
-
     if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({type: "formUpdate", data: formData}))
+      socket.send(JSON.stringify({ type: "formUpdate", data: formData }));
     }
   }
   return (

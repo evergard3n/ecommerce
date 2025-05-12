@@ -6,8 +6,8 @@ export interface Product {
     brand: string;
     description: string;
     storage: string;
-    url:string;
-    type: "phone" | "laptop" | "tablet"
+    url: string;
+    type: "phone" | "laptop" | "tablet";
 }
 export interface ProductCoverOnly {
     product_id: string;
