@@ -1,13 +1,21 @@
-import { poppins, geistSans } from "@/app/layout";
-import { type SingleItemProps } from "../products/singleItem";
+'use client'
 import SingleItem from "../products/singleItem";
 import Featured from "../components/featured";
-import { getProductById, getRecommendedProduct } from "@/app/lib/data"
+import { getRecommendedProduct } from "@/app/lib/data"
 import { auth } from "@clerk/nextjs/server";
 import { Product } from "@/app/lib/definitions";
-export default async function Recommended() {
-  const {userId} = await auth();
-  const recommendedProducts: Product[] = await getRecommendedProduct(userId? userId : "");
+import { useEffect, useState } from "react";
+import { useWebSocket } from "@/app/lib/wsContext";
+export default function Recommended() {
+  const chatIphone = useWebSocket()?.chatIphone;
+  const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
+  useEffect(()=>{
+    const fetchRecommendedProducts = async () => {
+      const products = await getRecommendedProduct("", chatIphone);
+      setRecommendedProducts(products);
+    };
+    fetchRecommendedProducts();
+  }, [chatIphone]);
   return (
     <section className="h-fit py-8 flex flex-col items-center gap-8">
       <Featured/>

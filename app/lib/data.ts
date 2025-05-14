@@ -2,6 +2,7 @@ import {
   Product,
   PhoneTechnicalDetails,
   ProductCoverOnly,
+  Chat,
 } from "./definitions";
 import { products, technical_details } from "./placeholder";
 
@@ -33,15 +34,23 @@ export async function getProductById(id: string, type: "phone" | "laptop") {
     return null;
   }
 }
-export async function getRecommendedProduct(userId: string) {
+export async function getRecommendedProduct(userId: string, searched?: boolean) {
   try {
     // const res = await fetch('/placeholder.json') ;
     // const res_json = await res.json()
 
     // TODO: search recommended products by userId
-    const response = await fetch(
-      `${backend_url}/api/products/recommended/${userId}`
-    );
+    let response;
+    if(searched) {
+      response = await fetch(
+        `${backend_url}/api/products/recommended/iphone_request`
+      );
+    } else {
+      response = await fetch(
+        `${backend_url}/api/products/recommended/${userId}`
+      );
+    }
+    
     if (!response.ok) {
       throw new Error("Cant fetch recommended");
     }
@@ -51,7 +60,6 @@ export async function getRecommendedProduct(userId: string) {
     //   throw new Error(`Failed fetching recommended`);
     // }
     const product: Product[] = res.slice(0, 4);
-    console.log(product);
     return product;
   } catch (error) {
     console.error("Database Error:", error);
@@ -155,7 +163,6 @@ export async function getPhonesByBrand({
       throw new Error("Cant fetch phones");
     }
     const res = await response.json();
-    console.log(res);
     const products: Product[] = res.items;
     return res;
   } catch (error) {
@@ -173,7 +180,6 @@ export async function getLaptopsPaginated({ page }: { page: number }) {
       throw new Error("Cant fetch laptops");
     }
     const res = await response.json();
-    console.log(res);
     const products: Product[] = res.items;
     return res;
   } catch (error) {
@@ -181,3 +187,55 @@ export async function getLaptopsPaginated({ page }: { page: number }) {
     throw new Error("Failed to fetch laptops");
   }
 }
+
+export function formatPhoneName(phoneId: string): string {
+  // Replace underscores with spaces
+  let formattedName = phoneId.replace(/_/g, ' ');
+  
+  // Handle special cases like "GB" and "RAM"
+  formattedName = formattedName
+    .replace(/(\d+)GB/g, '$1 GB')  // Add space before GB
+    .replace(/(\d+)RAM/g, '$1 RAM') // Add space before RAM
+    .replace(/\s+/g, ' ')          // Remove multiple spaces
+    .trim();                       // Remove leading/trailing spaces
+    
+  return formattedName;
+}
+
+export function convertToChatHistory(chatHistory: string[]): Chat[] {
+  const result: Chat[] = [];
+  let currentSender: string | null = null;
+  let currentMessageLines: string[] = [];
+
+  for (const line of chatHistory) {
+    const match = line.match(/^(\w+):\s*(.*)/); // Match "Sender: message"
+
+    if (match) {
+      // Save previous chat if exists
+      if (currentSender !== null) {
+        result.push({
+          sender: currentSender,
+          message: currentMessageLines.join('\n').trim(),
+        });
+      }
+
+      currentSender = match[1];
+      currentMessageLines = [match[2]]; // Start new message
+    } else if (currentSender !== null) {
+      // Continuation of previous message
+      currentMessageLines.push(line);
+    }
+  }
+
+  // Push the final message
+  if (currentSender !== null) {
+    result.push({
+      sender: currentSender,
+      message: currentMessageLines.join('\n').trim(),
+    });
+  }
+  console.log("result", result);
+  return result;
+}
+
+

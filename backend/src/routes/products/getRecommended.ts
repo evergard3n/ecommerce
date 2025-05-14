@@ -23,7 +23,14 @@ const route: FastifyPluginAsyncTypebox = async (app) => {
           .findOne({ user_id: userId });
 
         console.log("User profile found:", userProfile ? "yes" : "no");
-
+        if(userId === "iphone_request") {
+          const result = await app.mongo.db
+            .collection("phone-main")
+            .find({brand: "Apple"})
+            .limit(4)
+            .toArray();
+          return reply.send(result);
+        }
         if (!userProfile) {
           console.log("No user profile found, returning random phones");
           const result = await app.mongo.db

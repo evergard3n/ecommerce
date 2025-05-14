@@ -55,6 +55,12 @@ export default function ChatBox() {
             setText(e.target.value);
             adjustHeight();
           }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
+            }
+          }}
           className="rounded-lg p-2 focus:outline-none resize-none w-full overflow-hidden min-h-12 max-h-24"
           placeholder="Hỏi bất cứ điều gì..."
           required

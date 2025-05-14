@@ -1,6 +1,7 @@
+'use client'
 import { Product, ProductCoverOnly } from "@/app/lib/definitions";
 import Image from "next/image";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { getPhoneCover } from "@/app/lib/data";
 export type SingleItemProps = {
@@ -9,9 +10,16 @@ export type SingleItemProps = {
   price: string;
   image: string;
 };
-export default async function SingleItem({props, type} : {props: Product, type: "phone" | "laptop" | "tablet"}) {
+export default function SingleItem({props, type} : {props: Product, type: "phone" | "laptop" | "tablet"}) {
   const encodedProductId = encodeURIComponent(props.product_id);
-  const productCoverImage: ProductCoverOnly = await getPhoneCover({id: props.url, type});
+  const [productCoverImage, setProductCoverImage] = useState<ProductCoverOnly | null>(null);
+  useEffect(()=>{
+    const fetchProductCoverImage = async () => {
+      const productCoverImage: ProductCoverOnly = await getPhoneCover({id: props.url, type});
+      setProductCoverImage(productCoverImage);
+    }
+    fetchProductCoverImage();
+  }, [])
   return (
     <div className="lg:w-full lg:min-h-108 h-fit max-h-112 items-start border border-zinc-200 rounded-md overflow-hidden  hover:drop-shadow-lg hover:bg-gradient-to-b bg-white transition-all duration-200 ease-in-out">
       <Link
@@ -32,13 +40,15 @@ export default async function SingleItem({props, type} : {props: Product, type: 
               <div className="bg-zinc-300 w-full h-full">Loading...</div>
             }
           >
-            <Image
-              alt={props.name}
-              src={productCoverImage.cover_image}
-              width={180}
-              height={180}
-              className="overflow-hidden"
-            />
+            {productCoverImage && (
+              <Image
+                alt={props.name}
+                src={productCoverImage.cover_image}
+                width={180}
+                height={180}
+                className="overflow-hidden"
+              />
+            )}
           </Suspense>
         </div>
       </Link>

@@ -72,7 +72,6 @@ export default async function ProductDetails({
         <button className="mt-4 bg-zinc-700 text-white px-4 py-2 rounded-full text-xs flex items-center justify-center">
           <p>Show Full Details</p>
         </button>
-        <div className="w-12 h-12 absolute top-0 bg-black"></div>
       </div>
     );
   } else {
@@ -87,36 +86,53 @@ export default async function ProductDetails({
 
     return (
       <div>
-        <div className="grid grid-cols-1 gap-4 w-full h-fit">
-          <div className="flex flex-row gap-2 items-center">
-            <CpuChipIcon className="w-10 h-10" />
+        <div className="space-y-4 grid grid-cols-2 gap-8">
+          <div className="flex flex-col gap-2 items-center">
+            <div className="flex flex-row gap-2 items-center justify-start w-full">
+              <CpuChipIcon className="w-6 h-6" />
+              <p className="text-xl font-semibold">CPU</p>
+            </div>
             <div className="text-sm">
               <p>{technicalDetails.cpu}</p>
-              
             </div>
           </div>
-          <div className="flex flex-row gap-2 items-center">
-            <ComputerDesktopIcon className="w-8 h-8" />
+
+          <div className="flex flex-col gap-2 items-center">
+            <div className="flex flex-row gap-2 items-center justify-start w-full">
+              <ComputerDesktopIcon className="w-6 h-6" />
+              <p className="text-xl font-semibold">Features</p>
+            </div>
             <div className="text-sm">
               <p>{technicalDetails.more}</p>
             </div>
           </div>
-          <div className="flex flex-row gap-2 items-center">
-            <CircleStackIcon className="w-8 h-8" />
+
+          <div className="flex flex-col gap-2 items-center">
+            <div className="flex flex-row gap-2 items-center justify-start w-full">
+              <CircleStackIcon className="w-6 h-6" />
+              <p className="text-xl font-semibold">Memory</p>
+            </div>
             <div className="text-sm">
               <p>{technicalDetails.ram}</p>
-            
             </div>
           </div>
-          <div className="flex flex-row gap-2 items-center">
-            <DevicePhoneMobileIcon className="w-8 h-8" />
+
+          <div className="flex flex-col gap-2 items-center">
+            <div className="flex flex-row gap-2 items-center justify-start w-full">
+              <DevicePhoneMobileIcon className="w-6 h-6" />
+              <p className="text-xl font-semibold">Display</p>
+            </div>
             <div className="text-sm">
               <p>{technicalDetails.screen}</p>
             </div>
           </div>
-          <div className="flex flex-row gap-2 items-center pl-1">
-            <BoltIcon className="w-8 h-8" />
-            <div className="text-sm pl-1">
+
+          <div className="flex flex-col gap-2 items-center">
+            <div className="flex flex-row gap-2 items-center justify-start w-full">
+              <BoltIcon className="w-6 h-6" />
+              <p className="text-xl font-semibold">Battery</p>
+            </div>
+            <div className="text-sm">
               <p>{technicalDetails.battery}</p>
             </div>
           </div>

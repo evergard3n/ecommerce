@@ -20,7 +20,7 @@ export default function Chatbot() {
   }
   if (isOpen) {
     return (
-      <div className="bg-white min-h-[500px] rounded-lg w-96 flex flex-col items-center overflow-hidden fixed bottom-4 right-8  drop-shadow-sm">
+      <div className="bg-white min-h-[500px] rounded-lg w-96 flex flex-col items-center overflow-hidden fixed bottom-4 right-8  drop-shadow-sm z-50">
         <div className="h-12 bg-white border-b border-zinc-100 flex flex-row justify-between px-4 items-center text-black text-md w-full font-semibold">
           <p>Chatbot</p>
           <button onClick={handleClick}>
